@@ -1,19 +1,32 @@
 import type { NextPage } from 'next'
 import Head from 'next/head';
-import { useSession, signIn, signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
+import { Rings } from 'react-loader-spinner';
+import { useEffect, useState } from 'react';
+import { UserInterface } from 'utils/interfaces';
+import Login from './login';
 
-const Home: NextPage = () => {
+const Home = () => {
+  const { data: session, status } = useSession();
+  const [user, setUser] = useState<UserInterface | {}>({});
+
+  useEffect(() => {
+    const userInfo = {
+      name: session?.user?.name,
+      email: session?.user?.email,
+      image: session?.user?.image,
+    };
+
+    setUser(() => ({ ...userInfo }));
+  }, [status]);
+
   if (status === 'loading') {
     return <Rings color="#00BFFF" height={120} width={120} />;
   }
 
+  // redirect user to login page for sign in
   if (!session) {
-    return (
-      <>
-        Not signed in <br />
-        <button onClick={() => signIn()}>Sign in</button>
-      </>
-    );
+    return <Login />;
   }
 
   return (
