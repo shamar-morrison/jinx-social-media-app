@@ -3,7 +3,9 @@ import Head from 'next/head';
 import { useSession, signIn, signOut } from 'next-auth/react';
 
 const Home: NextPage = () => {
-  const { data: session } = useSession();
+  if (status === 'loading') {
+    return <Rings color="#00BFFF" height={120} width={120} />;
+  }
 
   if (!session) {
     return (
