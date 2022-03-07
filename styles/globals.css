@@ -14,3 +14,21 @@ body {
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
+
+.login-btn {
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 15px;
+  padding: 12px 20px;
+  border-radius: 4px;
+  background-color: rgb(255, 255, 255);
+  color: #000;
+  z-index: 999;
+  cursor: pointer;
+}
+
+.login-btn p {
+  font-size: .95rem;
+}
