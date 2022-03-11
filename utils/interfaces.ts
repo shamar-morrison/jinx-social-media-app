@@ -1,5 +1,5 @@
 export interface UserInterface {
-  name: string;
-  email: string;
-  image: string;
+  name: string | null | undefined;
+  email: string | null | undefined;
+  image: string | null | undefined;
 }
