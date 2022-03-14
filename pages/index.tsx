@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 import { Rings } from 'react-loader-spinner';
 import { useEffect, useState } from 'react';
-import { UserInterface } from 'utils/interfaces';
+import { SanityDoc, UserInterface } from 'utils/interfaces';
 import Login from './login';
 import { client } from 'client';
 import Home from 'pages/home';
@@ -13,7 +13,7 @@ const Index = () => {
 
   useEffect(() => {
     const userInfo: UserInterface = {
-      name: session?.user?.name,
+      name: session?.user?.name || 'Guest',
       email: session?.user?.email,
       image: session?.user?.image,
     };
@@ -23,11 +23,18 @@ const Index = () => {
 
   if (user?.name && user.email) {
     const doc = {
-      _id: user.name.toLowerCase().trim().split(' ')[0],
+      _id: `${user.name.toLowerCase().trim().split(' ')[0]}`,
       _type: 'user',
       userName: user?.name,
       image: user?.image,
     };
+
+    try {
+      // add user to localStorage
+      localStorage.setItem('user', JSON.stringify(doc));
+    } catch (er) {
+      console.error(er, `Error trying to save user. Please try again `);
+    }
 
     client
       .createIfNotExists(doc)
