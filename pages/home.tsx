@@ -44,7 +44,7 @@ const Home = () => {
         <div className="flex md:hidden flex-row">
           <div className="p-2 w-full flex flex-row justify-between shadow-md">
             <HiMenu fontSize={40} className="cursor-pointer" onClick={() => setToggleSidebar(true)} />
-            <Link href={'/'}>
+            <Link href={'/home'}>
               <img src={'/logo.png'} alt="logo" className="w-28" />
             </Link>
             <Link href={`user-profile/${user?._id}`}>
