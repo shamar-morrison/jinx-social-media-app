@@ -42,30 +42,32 @@ const Home = () => {
           <Sidebar person={user || null} />
         </div>
         <div className="flex md:hidden flex-row">
-          <HiMenu fontSize={40} className="cursor-pointer" onClick={() => setToggleSidebar(true)} />
-          <Link href={'/'}>
-            <img src={'/logo.png'} alt="logo" className="w-28" />
-          </Link>
-          <Link href={`user-profile/${user?._id}`}>
-            <img src={user?.image || '/default_user.jpg'} alt="profile picture" />
-          </Link>
-        </div>
-        {toggleSidebar && (
-          <div className="fixed w-4/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in">
-            <div className="absolute w-full flex justify-end items-center p-2">
-              <AiFillCloseCircle
-                fontSize={30}
-                className={'cursor-pointer'}
-                onClick={() => setToggleSidebar(false)}
-              />
-            </div>
-            <Sidebar person={user || null} closeToggle={setToggleSidebar} />
+          <div className="p-2 w-full flex flex-row justify-between shadow-md">
+            <HiMenu fontSize={40} className="cursor-pointer" onClick={() => setToggleSidebar(true)} />
+            <Link href={'/'}>
+              <img src={'/logo.png'} alt="logo" className="w-28" />
+            </Link>
+            <Link href={`user-profile/${user?._id}`}>
+              <img src={user?.image || '/default_user.jpg'} alt="profile picture" />
+            </Link>
           </div>
-        )}
+          {toggleSidebar && (
+            <div className="fixed w-4/5 bg-white h-screen overflow-y-auto shadow-md z-10 animate-slide-in">
+              <div className="absolute w-full flex justify-end items-center p-2">
+                <AiFillCloseCircle
+                  fontSize={30}
+                  className={'cursor-pointer'}
+                  onClick={() => setToggleSidebar(false)}
+                />
+              </div>
+              <Sidebar person={user || null} closeToggle={setToggleSidebar} />
+            </div>
+          )}
+        </div>
         <div className="pb-2 flex-1 h-screen overflow-y-scroll" ref={scrollRef}>
           <Routes>
             <Route path="/user-profile/:userId" element={<UserProfile />} />
-            <Route path="/*" element={<Pins />} />
+            <Route path="/*" element={<Pins person={user || null} />} />
           </Routes>
         </div>
       </div>

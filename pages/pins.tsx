@@ -1,6 +1,7 @@
+import { Props } from 'components/Sidebar';
 import React from 'react';
 
-const Pins = () => {
+const Pins = ({ person }: Props) => {
   return <div>pins</div>;
 };
 
