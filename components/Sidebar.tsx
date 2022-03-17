@@ -49,7 +49,7 @@ const Sidebar = ({ person, closeToggle }: Props) => {
               <RiHomeFill />
               Home
             </NavLink>
-            <h3 className="mt-2 px-5 text-base 2xl:text-xl">Discover Categories</h3>
+            <h3 className="mt-2 px-5 text-base ">Discover Categories</h3>
             {categories.slice(0, categories.length - 1).map(category => (
               <NavLink
                 to={`/category/${category.name}`}
@@ -64,7 +64,11 @@ const Sidebar = ({ person, closeToggle }: Props) => {
         </li>
       </ul>
       {person && (
-        <RouterLink to={`/user-profile/${person._id}`} className={'flex my-5 mb-3 gap-2 items-center'}>
+        <RouterLink
+          to={`/user-profile/${person._id}`}
+          className={'flex my-5 mb-3 gap-2 pad-2 items-center bg-white rounded-lg shadow-lg mx-3'}
+          onClick={handleCloseSidebar}
+        >
           <img src={person.image} className="w-10 h-10 rounded-full" alt="user profile" />
           <p>{person.userName}</p>
         </RouterLink>
