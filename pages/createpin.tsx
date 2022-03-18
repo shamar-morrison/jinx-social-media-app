@@ -1,6 +1,7 @@
 import React from 'react';
+import { Props } from 'components/Sidebar';
 
-const CreatePin = () => {
+const CreatePin = ({ person }: Props) => {
   return <div>CreateAPin</div>;
 };
 
